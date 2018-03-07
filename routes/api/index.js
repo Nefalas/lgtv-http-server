@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const Power = require('../../api/Power');
+const Sound = require('../../api/Sound');
 
 router.get('/on', (req, res) => {
   Power.turnOn()
@@ -22,6 +23,17 @@ router.get('/off', (req, res) => {
   })
   .catch((err) => {
     res.send('Could not turn off TV: ' + err);
+  })
+});
+
+router.get('/volume', (req, res) => {
+  let volume = parseInt(req.query.volume.toString());
+  Sound.setVolume(volume)
+  .then(() => {
+    res.send('Volume set to ' + volume);
+  })
+  .catch((err) => {
+    res.send('Could not set volume: ' + err);
   })
 });
 
