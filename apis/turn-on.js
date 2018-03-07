@@ -18,7 +18,8 @@ var turnOn = function() {
 };
 
 router.get('/', function (req, res) {
-  turnOn()
+  turnOn();
+  res.send('Turning on TV');
 });
 
 module.exports = router;

@@ -1,14 +1,11 @@
 {
-  "name": "LG-tv-http-server",
+  "name": "lg-smart-tv-web-api",
   "version": "0.2.4",
-  "description": "Simple lib to interact with and control an LG WebOS smart TV.",
+  "description": "A web API for controlling LG Smart TVs running WebOS",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/msloth/lgtv.js.git"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index"
   },
   "keywords": [
     "tv",
@@ -17,18 +14,16 @@
     "remote",
     "control"
   ],
-  "author": "Marcus Linderoth <linderoth.marcus@gmail.com> (https://github.com/msloth)",
+  "author": "Alexis Lindgren",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/msloth/lgtv.js/issues"
-  },
-  "homepage": "https://github.com/msloth/lgtv.js",
   "dependencies": {
     "body-parser": "^1.16.0",
     "express": "^4.14.1",
     "lgtv": "^0.2.4",
+    "nodemon": "^1.17.1",
     "node-wol": "^0.1.1",
     "request": "^2.79.0",
+    "request-promise": "^4.2.2",
     "websocket": "^1.0.17"
   }
 }

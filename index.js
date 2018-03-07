@@ -1,36 +1,27 @@
-var express = require('express')
-var app = express()
-var bodyParser = require('body-parser');
-var fs = require('fs');
+const PORT = 5555;
 
+const express = require('express');
+const bodyParser = require('body-parser');
+const fs = require('fs');
+
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+let configFile;
 try {
-  var CONFIG = require('./config')
+  configFile = require('./config')
 } catch (e) {
-  fs.writeFile("config.json", '{"lgtvip" : "0.0.0.0", "lgtvmac" : "00:00:00:00:00:00"}', function(err) {
+  fs.writeFile("config.json", '{"ip" : "0.0.0.0", "mac" : "00:00:00:00:00:00"}', function(err) {
     if(err) {
       return console.log(err);
     }
     console.log("Config file created");
   });
-} finally {
-  console.log(CONFIG);
 }
 
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use('/', require('./routes/home'));
+app.use('/api', require('./routes/api'));
 
-app.use(express.static('public'))
-
-app.get('/', function(req, res, next) {
-  res.type('html').sendFile(__dirname + '/index.html');
-});
-
-app.use('/input', require('./apis/change-input'));
-app.use('/volume', require('./apis/change-volume'));
-app.use('/alert', require('./apis/alert'));
-app.use('/off', require('./apis/turn-off'));
-app.use('/on', require('./apis/turn-on'));
-
-app.listen(5555, function () {
-  console.log('LGTV http server is up in http://localhost:5555')
-})
+app.listen(PORT);
+console.log('Server running at http://localhost:' + PORT);
