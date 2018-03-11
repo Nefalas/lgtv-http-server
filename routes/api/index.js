@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const Power = require('../../api/Power');
+const Control = require('../../api/Control');
 const Sound = require('../../api/Sound');
 const Netflix = require('../../api/Netflix');
 
@@ -35,6 +36,26 @@ router.get('/volume', (req, res) => {
   })
   .catch((err) => {
     res.send('Could not set volume: ' + err);
+  })
+});
+
+router.get('/play', (req, res) => {
+  Control.play()
+  .then(() => {
+    res.send('Playing on TV');
+  })
+  .catch((err) => {
+    res.send('Could not play on TV: ' + err);
+  })
+});
+
+router.get('/pause', (req, res) => {
+  Control.pause()
+  .then(() => {
+    res.send('Pausing on TV');
+  })
+  .catch((err) => {
+    res.send('Could not pause on TV: ' + err);
   })
 });
 
