@@ -5,6 +5,7 @@ const router = express.Router();
 
 const Power = require('../../api/Power');
 const Sound = require('../../api/Sound');
+const Netflix = require('../../api/Netflix');
 
 router.get('/on', (req, res) => {
   Power.turnOn()
@@ -34,6 +35,16 @@ router.get('/volume', (req, res) => {
   })
   .catch((err) => {
     res.send('Could not set volume: ' + err);
+  })
+});
+
+router.get('/startNetflix', (req, res) => {
+  Netflix.start()
+  .then(() => {
+    res.send('Netflix started');
+  })
+  .catch((err) => {
+    res.send('Could not start Netflix: ' + err);
   })
 });
 

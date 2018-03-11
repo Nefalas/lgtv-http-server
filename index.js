@@ -4,6 +4,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
+const Power = require('./api/Power');
+const Netflix = require('./api/Netflix');
+
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
